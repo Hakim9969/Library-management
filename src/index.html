@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>Library Management</h1>
+
+        <section>
+            <h2>Books</h2>
+            <input type="text" id="bookTitle" placeholder="Book Title" />
+            <button onclick="addBook()">Add Book</button>
+            <ul id="bookList"></ul>
+        </section>
+
+        <section>
+            <h2>Members</h2>
+            <input type="text" id="memberName" placeholder="Member Name" />
+            <button onclick="addMember()">Add Member</button>
+            <ul id="memberList"></ul>
+        </section>
+
+        <section class=>
+            <h2>Borrow Book</h2>
+            <div class="borrowbook">
+                <div>
+                    <p>Member</p>
+                    <select id="borrowMember"></select>
+                </div>
+                <div>
+                    <p>Book</p>
+                    <select id="borrowBook"></select>
+                    <button onclick="borrowBook()">Borrow</button>
+                </div>
+            </div>
+            <section>
+                <h2>Borrowed Books Summary</h2>
+    <table id="borrowedBooksTable">
+        <thead>
+            <tr>
+                <th>Member</th>
+                <th>Borrowed Books</th>
+            </tr>
+        </thead>
+        <tbody id="borrowedBooksList"></tbody>
+    </table>
+            </section>
+        </section>
+
+        <section>
+            <h2>Return Book</h2>
+            <div class="returnbook">
+                <div>
+                    <p>Member</p>
+                    <select id="returnMember" onchange="onReturnMemberChange()"></select>
+                </div>
+                <div>
+                    <p>Book</p>
+                    <select id="returnBook"></select>
+                    <button onclick="returnBook()">Return</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="../dist/index.js"></script>
+</body>
+
+</html>
