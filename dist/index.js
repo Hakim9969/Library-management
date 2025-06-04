@@ -10,17 +10,13 @@ function updateUI() {
     const borrowBook = document.getElementById("borrowBook");
     const returnMember = document.getElementById("returnMember");
     const returnBook = document.getElementById("returnBook");
-    // ✅ updated target for table body instead of <ul>
     const borrowedBooksList = document.getElementById("borrowedBooksList");
-    // Book list
     bookList.innerHTML = books.map(book => `<li>${book.title} ${book.borrowedBy !== undefined ? '(Borrowed)' : ''}
       <button onclick="deleteBook(${book.id})">Delete</button>
     </li>`).join("");
-    // Member list
     memberList.innerHTML = members.map(member => `<li>${member.name}
       <button onclick="deleteMember(${member.id})">Delete</button>
     </li>`).join("");
-    // Populate Borrow and Return selectors
     borrowMember.innerHTML = members.map(m => `<option value="${m.id}">${m.name}</option>`).join("");
     returnMember.innerHTML = borrowMember.innerHTML;
     borrowBook.innerHTML = books
@@ -29,13 +25,11 @@ function updateUI() {
         .join("");
     const selectedMemberId = parseInt(returnMember.value);
     updateReturnBookList(selectedMemberId);
-    // ✅ UPDATED: Borrowed Books Summary in table format
     borrowedBooksList.innerHTML = members.map(member => {
         const borrowed = books.filter(b => b.borrowedBy === member.id);
         const titles = borrowed.length > 0 ? borrowed.map(b => b.title).join(', ') : 'No books borrowed';
         return `<tr><td>${member.name}</td><td>${titles}</td></tr>`;
     }).join("");
-    // ✅ Persist to localStorage
     localStorage.setItem("books", JSON.stringify(books));
     localStorage.setItem("members", JSON.stringify(members));
 }
@@ -45,11 +39,9 @@ function updateReturnBookList(memberId) {
         .filter(b => b.borrowedBy === memberId)
         .map(b => `<option value="${b.id}">${b.title}</option>`)
         .join("");
-    // ✅ Persist here too (optional, could omit if done in updateUI)
     localStorage.setItem("books", JSON.stringify(books));
     localStorage.setItem("members", JSON.stringify(members));
 }
-// Event handler for returnMember change
 window.onReturnMemberChange = function () {
     const returnMember = document.getElementById("returnMember");
     const memberId = parseInt(returnMember.value);
@@ -102,7 +94,6 @@ window.returnBook = function () {
     updateUI();
 };
 document.addEventListener("DOMContentLoaded", () => {
-    // ✅ Load from localStorage
     const storedBooks = localStorage.getItem("books");
     const storedMembers = localStorage.getItem("members");
     if (storedBooks)
